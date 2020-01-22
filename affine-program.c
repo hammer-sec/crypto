@@ -1,10 +1,40 @@
-//main will contain the menu function, deciding to encrypt or decrypt
-
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <ctype.h>
+
+void prep_input(){
+    //This function will get input from stdin and format it correctly.
+    bool t_nonum_flag = false;
+    bool t_ucase_flag = false;
+    int i;
+
+    t_input = fgets(&t_input,281,stdin); //get plaintext string
+
+    while(!t_nonum_flag){ //change all digits into '' blank characters
+        for(i=0; i!='\0'; i++){
+            if(isdigit(t_input[i])){
+                t_input[i] = '';
+            }
+        }
+        t_nonum_flag = true;
+    }
+
+    while (!t_ucase_flag){ //turn every character into uppercase by subtracting 32 from it's ASCII value
+        for(i=0; i!='\0'; i++){
+            if(t_input[i]>='a' && t_input[i] <='z'){
+                t_input[i] = t_input[i] -32;
+            }
+        }
+        t_ucase_flag = true;
+    }
+
+    //t_input is now ready to be encrypted, as far as this function is concerned
+
+}
 
 int main(){
-
+//main will contain the menu function, deciding to encrypt or decrypt
     char option;
     bool opt_flag_su;
     int opt_inv_ctr;
@@ -20,6 +50,7 @@ int main(){
             case '1':
                 //encrypt
                 printf("Encrypting...\n");
+                prep_input();
                 opt_flag_su = true;
                 break;
             case '2':
@@ -32,7 +63,7 @@ int main(){
             default:
                 printf("Invalid option. Please try again.\n");
                 opt_inv_ctr++;
-                if (opt_inv_ctr >=5){return 1;}
+                if (opt_inv_ctr >=5){return 1;} //terminate after 5 invalid options
                 break;
         }
         option = getchar();
