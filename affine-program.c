@@ -5,30 +5,25 @@
 
 void prep_input(){
     //This function will get input from stdin and format it correctly.
-    bool t_nonum_flag = false;
-    bool t_ucase_flag = false;
+    char *t_input;
     int i;
 
-    t_input = fgets(&t_input,281,stdin); //get plaintext string
+    fgets(&t_input,281,stdin); //get plaintext string
 
-    while(!t_nonum_flag){ //change all digits into '' blank characters
-        for(i=0; i!='\0'; i++){
-            if(isdigit(t_input[i])){
-                t_input[i] = '';
-            }
+    //change all digits into '' blank characters
+    for(i=0; i!='\0'; i++){
+        if(isdigit(t_input[i])){
+            t_input[i] = (char) 0;
         }
-        t_nonum_flag = true;
     }
 
-    while (!t_ucase_flag){ //turn every character into uppercase by subtracting 32 from it's ASCII value
-        for(i=0; i!='\0'; i++){
-            if(t_input[i]>='a' && t_input[i] <='z'){
-                t_input[i] = t_input[i] -32;
-            }
+    //turn every character into uppercase by subtracting 32 from it's ASCII value
+    for(i=0; i!='\0'; i++){
+        if(t_input[i]>='a' && t_input[i] <='z'){
+            t_input[i] = t_input[i] -32;
         }
-        t_ucase_flag = true;
     }
-
+    
     //t_input is now ready to be encrypted, as far as this function is concerned
 
 }
